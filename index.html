@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <title>Pruebas Calculadora 2022</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script type="text/javascript" src="js/jspdf.debug.js"></script>
+    <script src="js/jspdf.plugin.autotable.src.js"></script>
+    <script src="js/jspdf.plugin.autotable.js"></script>
+    <script type="text/javascript" src="js/require.js"></script>
+    <script type="text/javascript" src="js/images.js"></script>
+    <script type="text/javascript" src="js/general.js"></script>
+    
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyCCEfowQPLWr99IGcM0tMOy8OplvcbW6x4",
+        authDomain: "calculadora-2022.firebaseapp.com",
+        databaseURL: "https://calculadora-2022-default-rtdb.firebaseio.com",
+        projectId: "calculadora-2022",
+        storageBucket: "calculadora-2022.appspot.com",
+        messagingSenderId: "82430120047",
+        appId: "1:82430120047:web:89bec0cd6d97341d62bd9a",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+  </head>
+  <body>
+    <div class="calculadora" id="calculadora">
+    <h1>Calculadora 2022</h1>
+    <input type="text" class="nr" /> </br>
+    <div class="paquetes">
+      <h3>Paquetes</h3>
+      <label><input type="radio" id="boxkey" name="paquete" />Acsendo Key</label
+      ><br />
+      <label
+        ><input type="radio" id="boxins" name="paquete2" />Acsendo
+        Inspired</label
+      ><br />
+      <label
+        ><input type="radio" id="boxeng" name="paquete3" />Acsendo
+        Engagement</label
+      ><br />
+      <label
+        ><input type="radio" id="boxagi" name="paquete4" />Acsendo Agile</label
+      ><br />
+    </div>
+    <div class="addons">
+      <h3>Addons</h3>
+      <button class="button-newnr">Desea ingresar un diferente numero de colaboradores</button> </br>
+      <input type="text" class="add-nr" /> </br>
+      <label><input type="checkbox" id="boxokrs" value="okrs" />OKRs</label
+      ><br />
+      <label><input type="checkbox" id="boxpid" value="pid" />PID</label><br />
+      <label
+        ><input type="checkbox" id="boxplan" value="plan" />Plan de
+        sucesion</label
+      ><br />
+      <label
+        ><input type="checkbox" id="boxclima" value="clima" />Clima por
+        aplicacion</label
+      ><br />
+      <label
+        ><input
+          type="checkbox"
+          id="boxseleccion"
+          value="seleccion"
+        />Seleccion</label
+      ><br />
+      <label><input type="checkbox" id="boxmetas" value="metas" />Metas</label
+      ><br />
+      <label
+        ><input
+          type="checkbox"
+          id="boxfeedback"
+          value="feedback"
+        />Feedback</label
+      ><br />
+      <label
+        ><input
+          type="checkbox"
+          id="boxconfeedback"
+          value="confeedback"
+        />Consultoria</label
+      ><br />
+      <label
+        ><input
+          type="checkbox"
+          id="boxcompe"
+          value="compe"
+        />Competencias</label
+      ><br />
+      <label
+        ><input
+          type="checkbox"
+          id="boxreco"
+          value="reco"
+        />Reconocimiento</label
+      ><br />
+      <label
+        ><input type="checkbox" id="boxencu" value="reco" />Encuestador</label
+      ><br />
+      <label><input type="checkbox" id="boxnom" value="reco" />Nom035</label
+      ><br />
+    </div>
+    <div id="consultoria">
+      <label
+        >Horas de consultoria<input type="number" min="1" max="50" id="horas"
+      /></label>
+    </div>
+    <div id="reclutamiento">
+      <label>
+        Seleccione numero de vacantes
+        <label><input type="checkbox" id="uno" />15</label><br />
+        <label><input type="checkbox" id="dos" />60</label><br />
+        <label><input type="checkbox" id="tres" />150</label><br />
+        <label><input type="checkbox" id="ilimitado" />Ilimitado</label><br />
+      </label>
+    </div>
+    <div class="moneda">
+      <h3>Escoga la moneda</h3>
+      <label><input type="radio" id="chile" name="peso" />Peso Chileno</label
+      ><br />
+      <label><input type="radio" id="mexico" name="peso" />Peso Mexicano</label
+      ><br />
+      <label><input type="radio" id="brasil" name="peso" />Reales</label
+      ><br />
+      <label
+        ><input type="radio" id="colombia" name="peso" />Peso Colombiano</label
+      ><br />
+      <label
+        ><input type="radio" id="usa" name="peso" />Dolar estadounidense</label
+      ><br />
+    </div>
+    <div class="anos">
+      <h3>Inserte el numero de años</h3>
+      <input type="text" class="numanos" />
+    </div>
+    <div class="boxdescuento">
+      <h3>Inserte el porcentaje del descuento</h3>
+      <input type="text" class="descuento" style="width: 3%;" /><span> %</span>
+    </div>
+    <h2 id="resultado"></h2>
+    <h4 id="unitario"></h2>
+    <input type="button" id="calcular" value="Calcular" />
+    <input type="button" id="run" value="Descuento" />
+    <input type="button" id="pdf-propuesta" value="Propuesta" />
+  </div>
+  
+  <div class="propuesta"  id="propuesta">
+    <h1>Propuesta comercial</h1>
+   <div><label>Comercial: </label> <select class="" id="comercial"></select></div><br>
+   <label>Idioma:  </label>
+    <label><input type="radio" id="esp" name="idioma" />Español</label>
+    <label><input type="radio" id="por" name="idioma" />Portugues</label> <br><br>
+   <label>Nombre de la Empresa </label> <input type="text" id="nomempresa" /><br><br>
+   <label>Persona de Contacto </label> <input type="text" id="contactopropu" /><br><br>
+   <label>Fecha de vigencia de la propuesta</label> <input type="date" id="fecha" /><br><br>
+   <textarea name="textarea" rows="10" cols="50" id="observaciones">Observaciones</textarea><br><br>
+   <input type="button" id="descargar" value="Generar propuesta" />
+   <input type="button" id="atras" value="Atras" />
+  </div>
+  </body>
+</html>
+
